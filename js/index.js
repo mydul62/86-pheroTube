@@ -1,3 +1,6 @@
+const videoCardContent = document.getElementById('video_area');
+const itemErrorContent= document.getElementById('item_not_found');
+
 const loadCatagoris = async () => {
   const url = " https://openapi.programming-hero.com/api/videos/categories";
   let res = await fetch(url);
@@ -9,6 +12,7 @@ const loadCatagoris = async () => {
 
     button.innerText = data.category;
     button.classList.add(
+      "categoryBtn",
       "bg-[#cccccca0]",
       "btn-primary",
       "py-2",
@@ -20,22 +24,31 @@ const loadCatagoris = async () => {
     button.addEventListener('click' ,()=>{
       videoCardContent.innerHTML ='';
       LoadVideo(data.category_id)
+      const allBtn = document.getElementsByClassName('categoryBtn');
+      for(let btn of allBtn){
+        btn.classList.remove('bg-red-600')
+      }
+      button.classList.add('bg-red-600')
+      
     })
   });
 };
-loadCatagoris();
-const videoCardContent = document.getElementById('video_area');
-const itemErrorContent= document.getElementById('item_not_found');
+
+
+let selectedCategory =1000;
 const LoadVideo = async (id) => {
+  selectedCategory = id;
   const url = ` https://openapi.programming-hero.com/api/videos/category/${id}`;
   let res = await fetch(url);
   let data = await res.json();
   const videoData = data.data;
   if(videoData.length ===0){
     itemErrorContent.classList.remove('hidden')
+  }else{
+    itemErrorContent.classList.add('hidden')
+
   }
   videoData.forEach((item)=>{
-    console.log(item);
     let verifiedBatch = '';
     if(item.authors[0].verified){
       verifiedBatch = `<img class="w-7" src="images/social-media.png" alt="" />`
@@ -50,7 +63,7 @@ const LoadVideo = async (id) => {
                 <img class="h-9 w-9 rounded-full" src=" ${item.authors[0].profile_picture}" alt="" />
               </div>
               <div class="flex-1 space-y-4">
-                <h2 class="card-title">
+                <h2 class="card-title text-[18px] lg:text-2xl ">
                  ${item.title}
                 </h2>
                 <div class="">
@@ -60,7 +73,7 @@ const LoadVideo = async (id) => {
                     ${verifiedBatch}
                   </div>
                 </div>
-                <h5>${item.others.views}</h5>
+                <h5>${item.others.views} viwes</h5>
               </div>
               </div>
             </div>
@@ -70,3 +83,7 @@ const LoadVideo = async (id) => {
   });
 
 };
+
+
+loadCatagoris();
+LoadVideo(selectedCategory)

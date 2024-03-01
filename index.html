@@ -21,26 +21,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <header>
-      <div class="main-nav container mx-auto py-9 border-b-2">
-        <nav class="flex justify-between">
-          <div class="logo">
-            <img src="images/Logo.png" alt="" />
+    <header class="px-2 lg:px-0">
+      <div class="main-nav container mx-auto py-9 border-b-2 ">
+        <nav class="flex items-center justify-between ">
+          <div class="logo  ">
+            <img class="w-[100px] md:w-full" src="images/Logo.png" alt="" />
           </div>
-          <div class="sortBtn">
-            <button class="btn">Sort by view</button>
+          <div class="sortBtn hidden  justify-center md:inline-block">
+            <button class="btn mr-24">Sort by view</button>
           </div>
-          <div class="blogBtn">
-            <button class="btn bg-red-700 text-white">Blog</button>
+          <div class="blogBtn ">
+            <button class="py-1 px-2 rounded-md lg:py-2 lg:px-3 bg-red-700 text-white">Blog</button>
           </div>
         </nav>
       </div>
     </header>
-    <main>
+    <main class="px-2 lg:px-0">
       <section class="container mx-auto">
         <div
           id="search-item-btn"
-          class="flex flex-row gap-4 justify-center py-9"
+          class="flex flex-col lg:flex-row  gap-4 justify-center py-9"
         >
         </div>
       </section>
